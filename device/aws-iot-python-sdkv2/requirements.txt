@@ -1,0 +1,4 @@
+awsiotsdk==1.11.5
+cryptography==3.3.2
+pyqrcode==1.2.1
+pypng==0.20220715.0

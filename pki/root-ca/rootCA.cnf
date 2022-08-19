@@ -1,0 +1,90 @@
+#
+# Example OpenSSL configuration file for Root CA
+#
+
+[ ca ]
+default_ca = CA_default
+
+# This definition stops the following lines choking if HOME isn't
+# defined.
+HOME			= .
+
+[ CA_default ]
+dir             = .
+private_key     = $dir/root-ca-priv.key.pem
+certificate     = $dir/rootCA.crt.pem
+RANDFILE        = $dir/.rand
+crl_dir           = $dir/crl
+new_certs_dir     = ./
+database          = $dir/index.txt
+serial            = $dir/serial
+policy          = policy_loose
+
+
+[ policy_loose ]
+# Allow the intermediate CA to sign a more diverse range of certificates.
+# See the POLICY FORMAT section of the `ca` man page.
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits		= 2048
+distinguished_name	= req_distinguished_name
+attributes		= req_attributes
+
+# Stop confirmation prompts. All information is contained below.
+prompt			= no
+
+# The extensions to add to a certificate request - see [ v3_req ]
+req_extensions		= v3_req
+
+[ req_distinguished_name ]
+# Describe the Subject (ie the origanisation).
+# The first 6 below could be shortened to: C ST L O OU CN
+# The short names are what are shown when the certificate is displayed.
+# Eg the details below would be shown as:
+#    Subject: C=UK, ST=Hertfordshire, L=My Town, O=Some Organisation, OU=Some Department, CN=www.example.com/emailAddress=bofh@example.com
+
+# Leave as long names as it helps documentation
+
+countryName=		US
+stateOrProvinceName=	AnyState
+localityName=		AnyTown
+organizationName=	AnyCompany Inc
+organizationalUnitName=	RootCA
+commonName=		anycompany.com
+emailAddress=		root@anycompany.com
+
+[ req_attributes ]
+# None. Could put Challenge Passwords, don't want them, leave empty
+
+[ v3_req ]
+
+# X509v3 extensions to add to a certificate request
+# See x509v3_config
+
+# What the key can/cannot be used for:
+# pathlen specifies how many CAs can appear below root in chain
+basicConstraints = critical, CA:TRUE, pathlen:2
+keyUsage = critical, digitalSignature, keyCertSign, cRLSign
+subjectKeyIdentifier = hash
+
+# The subjectAltName is where you give the names of extra web sites.
+# You may have more than one of these, so put in the section [ alt_names ]
+# If you do not have any extra names, comment the next line out.
+#subjectAltName = @alt_names
+
+# List of all the other DNS names that the certificate should work for.
+# alt_names is a name of my own invention
+#[ alt_names ]
+#DNS.1 = devel.example.com
+#DNS.2 = ipv6.example.com
+#DNS.3 = ipv4.example.com
+#DNS.4 = test.example.com
+#DNS.5 = party.example.com
+

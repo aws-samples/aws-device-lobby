@@ -1,0 +1,27 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Device {
+  certid: ID!
+  devicename: String
+  devstate: String
+  targetaccount: String
+  targetregion: String
+}
+
+type Mutation {
+  addDevice(certid: ID!, targetaccount: String!, targetregion: String!): Device!
+}
+
+type PaginatedDevices {
+  devices: [Device!]!
+  nextToken: String
+}
+
+type Query {
+  getDevice(certid: ID): Device
+  listDevices(count: Int, nextToken: String): PaginatedDevices!
+  listLobbyDevices(count: Int, devstate: String, nextToken: String): PaginatedDevices!
+}
