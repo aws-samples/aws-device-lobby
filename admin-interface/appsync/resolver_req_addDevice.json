@@ -1,0 +1,20 @@
+{
+    "version" : "2018-05-29",
+    "operation" : "UpdateItem",
+    "key" : {
+        "certid" : { "S" : "$context.arguments.certid" }
+    },
+    "update": {
+        "expression" : "SET #targetregion = :targetregion, #targetaccount = :targetaccount, #devstate = :devstate ",
+        "expressionNames": {
+            "#targetregion" : "targetregion",
+            "#targetaccount" : "targetaccount",
+            "#devstate" : "devstate"
+        },
+        "expressionValues" : {
+            ":targetaccount" : { "S": "$context.arguments.targetaccount" },
+            ":targetregion" : { "S": "$context.arguments.targetregion" },
+            ":devstate" : { "S": "claimed" }
+        }
+    }
+}

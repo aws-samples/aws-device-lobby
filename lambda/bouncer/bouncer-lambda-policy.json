@@ -1,0 +1,37 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowDeviceLobbyLedgerTableAccess",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:Update*"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/devicelobby-ledger"
+        },
+        {
+            "Sid": "AllowLogging",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Sid": "AllowIoTActions",
+            "Effect": "Allow",
+            "Action": [
+                "iot:CreateThing",
+                "iot:AttachThingPrincipal",
+                "iot:DescribeCertificate",
+                "iot:UpdateCertificate",
+                "iot:CreatePolicy",
+                "iot:AttachPrincipalPolicy",
+                "iot:RegisterCertificateWithoutCA"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

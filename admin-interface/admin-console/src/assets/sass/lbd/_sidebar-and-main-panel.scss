@@ -1,0 +1,30 @@
+
+.main-panel{
+    background: rgba(203,203,210,.15);
+    position: relative;
+    float: right;
+    width: calc(100%);
+
+    > .content{
+        padding: 30px 15px;
+        min-height: calc(100% - 123px);
+    }
+
+    > .footer{
+        border-top: 1px solid #e7e7e7;
+    }
+
+    .navbar{
+        margin-bottom: 0;
+    }
+}
+
+.main-panel{
+    -webkit-transition-property: top,bottom;
+    transition-property: top,bottom;
+    -webkit-transition-duration: .2s,.2s;
+    transition-duration: .2s,.2s;
+    -webkit-transition-timing-function: linear,linear;
+    transition-timing-function: linear,linear;
+    -webkit-overflow-scrolling: touch;
+}
